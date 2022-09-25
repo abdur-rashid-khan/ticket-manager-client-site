@@ -44,7 +44,7 @@ const DashBoard = () => {
 					<div className="drawer-side ">
 						<label htmlFor="open-dashboard-menu" className="drawer-overlay "></label>
 						<ul className="menu p-4 overflow-y-auto w-80 bg-white border-r-1 shadow-2xl  text-slate-600 font-semibold" id='slideBar'>
-							<div className="profile text-center py-8">
+							{/* <div className="profile text-center py-8">
 								{
 									user?.photoURL?
 										<div className="avatar online ">
@@ -67,7 +67,7 @@ const DashBoard = () => {
 									user ? <button className='capitalize mt-4 inline-block border text-slate-400 hover:bg-blue-700 text-sm hover:text-white px-6 py-2 rounded' onClick={logout}>logOut</button> :
 										<Link to={'/login'} className='capitalize mt-1 inline-block border text-slate-400 hover:bg-blue-700 text-sm hover:text-white px-6 py-2 rounded'>logIn</Link>
 								}
-							</div>
+							</div> */}
 							{/* <!-- Sidebar content here --> */}
 							<li className='py-1 text-lg hover:text-black rounded'><CustomLink className='flex gap-4 capitalize' to={'/'}><HomeIcon className='text-slate-600 w-6'></HomeIcon> Headline Of Top News</CustomLink></li>
 							<li className='py-1 text-lg hover:text-black rounded'><CustomLink className='flex gap-4 capitalize' to={'/add-news'}><ViewGridAddIcon className='text-slate-600 w-6' /> Add News</CustomLink></li>
