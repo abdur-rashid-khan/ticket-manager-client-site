@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
 import auth from '../../../firebase.init';
 import Loading from '../../Loading/Loading';
-import './Upload.css'
+import './Collection.css'
 
-const AddNews = () => {
+const Collection = () => {
   const [user, loading, error] = useAuthState(auth);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const onSubmit = data => {
@@ -27,4 +27,4 @@ const AddNews = () => {
   );
 };
 
-export default AddNews;
+export default Collection;

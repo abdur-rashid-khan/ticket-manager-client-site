@@ -6,22 +6,27 @@ import Overview from './components/DashBoard/Overview/Overview';
 // import RequireAuth from './components/Auth/RequireAuth';
 import Login from './components/Auth/Login/Login';
 import SignUp from './components/Auth/CreateAccout/NewAccount';
-import ManageNews from './components/DashBoard/ManageNews/ManageNews';
-import AddNews from './components/DashBoard/Upload/AddNews';
+import Collection from './components/DashBoard/Collection/Collection';
+import Ticket from './components/DashBoard/Ticket/Ticket';
+import Members from './components/DashBoard/Members/Members';
+import Navbar from './components/DashBoard/Navbar/Navbar';
 function App() {
   return (
     <>
-      {/* <Header></Header> */}
+      <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<DashBoard />} >
           <Route index element={
             <Overview></Overview>
           }></Route>
-          <Route path='add-news' element={
-            <AddNews></AddNews>
+          <Route path='/collection' element={
+            <Collection></Collection>
           }></Route>
-          <Route path='manage-news' element={
-            <ManageNews></ManageNews>
+          <Route path='ticket' element={
+            <Ticket></Ticket>
+          }></Route>
+          <Route path='members' element={
+            <Members></Members>
           }></Route>
 
         </Route>

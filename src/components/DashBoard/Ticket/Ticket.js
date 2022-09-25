@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ManageNews = () => {
+const Ticket = () => {
   return (
     <div>
       <h1>Coming soon</h1>
@@ -8,4 +8,4 @@ const ManageNews = () => {
   );
 };
 
-export default ManageNews;
+export default Ticket;
