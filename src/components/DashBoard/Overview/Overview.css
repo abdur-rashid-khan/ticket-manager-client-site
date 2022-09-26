@@ -18,11 +18,7 @@
    transition-property: transform, opacity;
    overflow-y: hidden;
    overscroll-behavior: contain;
-   border-radius:none ;
-   -webkit-border-radius:none ;
-   -moz-border-radius:none ;
-   -ms-border-radius:none ;
-   -o-border-radius:none ;
+
 }
 .modal-box {
    max-height: calc(100vh - 5em);
@@ -48,9 +44,9 @@
    overscroll-behavior: contain;
 }
 .modal-open .modal-box, .modal-toggle:checked + .modal .modal-box, .modal:target .modal-box {
-   border-radius: 0;
-   -webkit-border-radius: 0;
-   -moz-border-radius: 0;
-   -ms-border-radius: 0;
-   -o-border-radius: 0;
+   border-radius: 10px;
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   -ms-border-radius: 10px;
+   -o-border-radius: 10px;
 }
