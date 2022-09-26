@@ -2,23 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import auth from '../../../firebase.init';
 import Loading from '../../Loading/Loading';
 import AddComponents from '../AddComponents/AddComponents';
 import './Overview.css'
 
 const Overview = () => {
-  const [headline, setHeadline] = useState([]);
+  const [ticket, setTicket] = useState([]);
   const [user, loading, error] = useAuthState(auth);
 
-  // useEffect(() => {
-  //   fetch('', {
-  //     method: 'GET',
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => setHeadline(data))
-  // }, [user])
-
+  useEffect(() => {
+    fetch('http://localhost:5000/ticket', {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => setTicket(data))
+  }, [])
+  console.log(ticket);
   // call add ticket component 
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -30,6 +31,21 @@ const Overview = () => {
       ticketType: e.ticketType,
       comment: e.comment
     }
+    fetch('http://localhost:5000/add-ticket', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify(ticketDetails)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.acknowledged) {
+          Swal.fire('Data insert success', '', 'success');
+          reset();
+        }
+      })
     console.log(ticketDetails);
     reset()
   }
@@ -56,10 +72,22 @@ const Overview = () => {
             </tr>
           </thead>
           <tbody>
-            <td className='text-center border-r border-[#fefefe] text-[#fff] rounded px-0 py-0'><label htmlFor="my-modal" className="btn modal-button w-full rounded bg-blue-700 border-none hover:bg-blue-600">open modal</label></td>
-            <td className='text-center border-r border-[#fefefe] text-[#fff] rounded px-0 py-0' ><label htmlFor="my-modal" className="btn modal-button w-full rounded bg-blue-700 border-none hover:bg-blue-600">open modal</label></td>
-            <td className='text-center border-r border-[#fefefe] text-[#fff] rounded px-0 py-0' ><label htmlFor="my-modal" className="btn modal-button w-full rounded bg-blue-700 border-none hover:bg-blue-600">open modal</label></td>
-            <td className='text-center border-r border-[#fefefe] text-[#fff] rounded px-0 py-0' ><label htmlFor="my-modal" className="btn modal-button w-full rounded bg-blue-700 border-none hover:bg-blue-600">open modal</label></td>
+            {
+              ticket?.map((t) =>
+                <>
+                  <tr>
+                    {t.ticketType === 'normal'}<td>{t?.ticketTitle}</td>
+                    {/* {t.ticketType === 'stander'} <td>{t?.ticketTitle}</td> */}
+                    {/* {t.ticketType === 'medium'} <td>{t?.ticketTitle}</td> */}
+                    {/* {t.ticketType === 'height'} <td>{t?.ticketTitle}</td> */}
+                  </tr>
+                </>
+              )
+            }
+            <td className='text-center border-r border-[#fefefe] text-[#fff] rounded px-0 py-0'><label htmlFor="my-modal" className="btn modal-button w-full rounded bg-blue-700 border-none hover:bg-blue-600">Add Ticket</label></td>
+            <td className='text-center border-r border-[#fefefe] text-[#fff] rounded px-0 py-0' ><label htmlFor="my-modal" className="btn modal-button w-full rounded bg-blue-700 border-none hover:bg-blue-600">Add Ticket</label></td>
+            <td className='text-center border-r border-[#fefefe] text-[#fff] rounded px-0 py-0' ><label htmlFor="my-modal" className="btn modal-button w-full rounded bg-blue-700 border-none hover:bg-blue-600">Add Ticket</label></td>
+            <td className='text-center border-r border-[#fefefe] text-[#fff] rounded px-0 py-0' ><label htmlFor="my-modal" className="btn modal-button w-full rounded bg-blue-700 border-none hover:bg-blue-600">Add Ticket</label></td>
           </tbody>
         </table>
         <>
@@ -138,10 +166,10 @@ const Overview = () => {
                           }
                         })}>
                         <option disabled selected >Select Ticket</option>
-                        <option value={'Normal'}>Normal</option>
-                        <option value={'Stander'}>Stander</option>
-                        <option value={'Medium'}>Medium</option>
-                        <option value={'Height'}>Height</option>
+                        <option value={'normal'}>Normal</option>
+                        <option value={'stander'}>Stander</option>
+                        <option value={'medium'}>Medium</option>
+                        <option value={'height'}>Height</option>
                       </select>
                       <label className="">
                         {errors.customFields?.type === "required" && (
